@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <script src="js/main.js"></script>
+    </head>
+    <body>
+        <button id="go">Humlebæk -&gt; Nørreport</button>
+        <script>
+            var planer = Rejseplanen.planer();
+            planer.from('Humlebæk St.');
+            planer.to('Nørreport St.');
+            planer.now();
+            document.getElementById('go').addEventListener('click', () => { 
+                window.location = planer.search(); 
+            });
+        </script>
+    </body>
+</html>
