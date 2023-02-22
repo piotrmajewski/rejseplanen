@@ -4,15 +4,55 @@
         <meta charset="utf-8" />
         <meta name=viewport content="width=device-width, initial-scale=1">
         <script src="js/main.js"></script>
-    </head>
-    <body style="max-width: 800px; margin: auto">
-        <button id="go">Humlebæk -&gt; Nørreport</button>
         <script>
+            function ShowInput(container, values, inputName, selectHandler) {
+                var _container = document.getElementById(container);
+                var i = 0;
+                for (var stop of values) {
+                    var input = document.createElement("input");
+                    input.type = "radio";
+                    input.value = stop;
+                    input.name = inputName;
+                    input.id = inputName + i;
+                    input.addEventListener('change', selectHandler);
+                    _container.append(input);
+
+                    var label = document.createElement("label");
+                    label.htmlFor = inputName + i;
+                    label.append(stop);
+                    _container.append(label);
+
+                    var br = document.createElement("br");
+                    _container.append(br);
+
+                    i++;
+                }
+            }
+        </script>
+    </head>
+    <body style="max-width: 400px; margin: auto">
+        <div>From:
+            <div id="_from"></div>
+        </div>
+        <div>To:
+            <div id="_to"></div>
+        </div>
+        <button id="go"> Now </button> <button id="go30"> In 30 min </button>
+        <script>
+            const namesFrom = ['Humlebæk St.', 'Kokkedal St.', 'Nørreport St.'];
+            const namesTo = ['Humlebæk St.', 'Kokkedal St.', 'Nørreport St.'];
             var planer = Rejseplanen.planer();
-            planer.from('Humlebæk St.');
-            planer.to('Nørreport St.');
-            planer.now();
-            document.getElementById('go').addEventListener('click', () => { 
+
+            ShowInput("_from", namesFrom, "from", (event) => {planer.from(event.target.value);});
+            ShowInput("_to", namesTo, "to", (event) => {planer.to(event.target.value);});
+
+            document.getElementById('go').addEventListener('click', () => {
+                planer.now();
+                window.location = planer.search(); 
+            });
+
+            document.getElementById('go30').addEventListener('click', () => { 
+                planer.afterMinutes(30);
                 window.location = planer.search(); 
             });
         </script>
