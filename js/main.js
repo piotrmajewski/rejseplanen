@@ -1,17 +1,11 @@
 var Rejseplanen = (function () {
-    const _urlPrefix = "https://www.rejseplanen.dk/webapp/index.html?language=da_DA#";
-    const _urlSuffix = "!timeSel|depart!start|1";
+    const _urlPrefix = "https://www.rejseplan.dk/?";
+    const _urlSuffix = "timeSel=depart&start=1";
 
     function _formatDate(aDate) {
-        var month = (aDate.getMonth() + 1).toString();
-        if (month.length == 1) {
-            month = '0' + month;
-        }
-        var day = aDate.getDate().toString();
-        if (day.length == 1) {
-            day = '0' + day;
-        }
-        return day + "." + month + "." + aDate.getFullYear();
+        var month = (aDate.getMonth() + 1).toString().padStart(2, "0");
+        var day = aDate.getDate().toString().padStart(2, "0");
+        return `${day}.${month}.${aDate.getFullYear()}`;
     }
 
     function _formatTime(aDate) {
@@ -26,19 +20,19 @@ var Rejseplanen = (function () {
             var _to = "";
 
             function _s() {
-                return "!S|" + encodeURIComponent(_from);
+                return "S=" + encodeURIComponent(_from) + "&";
             }
         
             function _z() {
-                return "!Z|" + encodeURIComponent(_to);
+                return "Z=" + encodeURIComponent(_to) + "&";
             }
         
             function _d() {
-                return "!date|" + _formatDate(_date);
+                return "date=" + _formatDate(_date) + "&";
             }
         
             function _t() {
-                return "!time|" + _formatTime(_date);
+                return "time=" + _formatTime(_date) + "&";
             }
 
             return {

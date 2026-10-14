@@ -1,2 +1,2 @@
-A web application to use https://help.rejseplanen.dk/hc/da/articles/115000374849-Intelligente-links-til-Rejseplanen
-and in the future, https://help.rejseplanen.dk/hc/da/articles/214174465-Rejseplanens-API
+A web application to use https://labs.rejseplanen.dk/hc/da/articles/21950431101085-Intelligente-links-til-rejseplanen-dk
+and in the future, https://labs.rejseplan.dk/hc/en-us/sections/8312697931805-About-Labs
